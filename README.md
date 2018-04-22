@@ -16,6 +16,21 @@ Create and collect messages by filter.
 
 :anti-forgery **disabled**. Set to true to add CSRF protection via the ring-anti-forgery library.
 
+* **POST** /filter {"topic": "books", "q": "sicp"} Content-Type	application/json
+(add new filter to system)
+* **GET** /filter
+(get all filters)
+* **GET** /filter?id=1 
+(get messages by filter)
+* **DELETE** /filter {"id": 1} Content-Type	application/json
+(delete filter by id)
+* **POST** /msg { "topic": "books", "m": "Some nice book"} Content-Type	application/json
+(add message to Kafka)
+
+There is no Web client to test this API.
+
+You should use some debug tools, e.g. [Yet Another REST Client](https://github.com/paulhitz/yet-another-rest-client) chrome extension.
+
 ## Prerequisites
 
 You will need [Leiningen](https://leiningen.org/) 2.0.0 or above installed.
