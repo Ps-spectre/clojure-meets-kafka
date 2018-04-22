@@ -1,5 +1,6 @@
 (ns clojure-meets-kafka.handler
-  (:require [compojure.core :refer :all]
+  (:require [clojure-meets-kafka.filters :as filters]
+            [compojure.core :refer :all]
             [compojure.route :as route]
             [ring.middleware.json :refer [wrap-json-body]]
             [ring.util.response :refer [response]]
@@ -13,6 +14,7 @@
   (let [topic (get-in r [:body :topic])
         q (get-in r [:body :q])]
     (println "\n==> ADD filter: " topic ", q: " q)
+    (filters/add-filter topic q)
     "ok"))
 
 (defn add-message [r]
