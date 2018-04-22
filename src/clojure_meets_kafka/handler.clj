@@ -6,22 +6,30 @@
             [ring.util.response :refer [response]]
             [ring.middleware.defaults :refer [wrap-defaults site-defaults]]))
 
+(defonce state (atom {:filters {}
+                      :lastId 0}))
+
 (defn delete-filter [r] 
-  (println "\n==> DELETE ID: " (get-in r [:body :id]))
-  "ok")
+  (println "req: " r)
+  (if (filters/delete-filter (get-in r [:body :id] -1) state)
+    "success: filter was deleted!"
+    "failure: can't find filter"))
 
 (defn add-filter [r]
-  (let [topic (get-in r [:body :topic])
+  (let [t (get-in r [:body :topic])
         q (get-in r [:body :q])]
-    (println "\n==> ADD filter: " topic ", q: " q)
-    (filters/add-filter topic q)
-    "ok"))
+    (filters/add-filter t q state)
+    (println "STATE!!! " @state)
+    (println "get filter: " (nil? (filters/get-filter 135 state)))
+    "success: filter was added!"))
 
 (defn add-message [r]
   "ok")
 
 (defn get-filters [r]
-  "ok")
+  (let [s (clojure.string/join "\n" (into [] (get @state :filters)))]
+    (println "-->" s)
+    (str "all filters: " s)))
 
 (defroutes app-routes
   (GET "/" [] "Hello World")
