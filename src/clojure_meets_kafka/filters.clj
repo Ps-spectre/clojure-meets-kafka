@@ -20,11 +20,11 @@
     (swap! state assoc-in [ :filters id ] filter)))
 
 (defn get-filter [id state]
+  ;; get filter by id from global state
   (get-in @state [:filters id]))
 
 (defn delete-filter [id state] 
   ;; delete filter from global state
-  (println "try delete by id: " id)
   (let [f (get-filter id state)]
     (when (not (nil? f)) 
       (swap! state update-in [ :filters ] dissoc id))

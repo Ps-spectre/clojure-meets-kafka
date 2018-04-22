@@ -10,7 +10,6 @@
                       :lastId 0}))
 
 (defn delete-filter [r] 
-  (println "req: " r)
   (if (filters/delete-filter (get-in r [:body :id] -1) state)
     "success: filter was deleted!"
     "failure: can't find filter"))
@@ -19,20 +18,14 @@
   (let [t (get-in r [:body :topic])
         q (get-in r [:body :q])]
     (filters/add-filter t q state)
-    (println "STATE!!! " @state)
-    (println "get filter: " (nil? (filters/get-filter 135 state)))
     "success: filter was added!"))
-
-(defn add-message [r]
-  "ok")
 
 (defn get-filters [r]
   (let [s (clojure.string/join "\n" (into [] (get @state :filters)))]
-    (println "-->" s)
     (str "all filters: " s)))
 
 (defroutes app-routes
-  (GET "/" [] "Hello World")
+  (GET "/" [] "Web API sample. Get data from Kafka.")
   (GET "/filter" [id] get-filters)
   (DELETE "/filter" [r] delete-filter)
   (POST "/filter" [r] add-filter)
