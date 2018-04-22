@@ -14,6 +14,8 @@ Create and collect messages by filter.
 
 ## Web API
 
+:anti-forgery **disabled**. Set to true to add CSRF protection via the ring-anti-forgery library.
+
 ## Prerequisites
 
 You will need [Leiningen](https://leiningen.org/) 2.0.0 or above installed.
