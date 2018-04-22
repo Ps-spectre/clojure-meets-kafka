@@ -1,6 +1,7 @@
 # Clojure-meets-kafka
 
 Simple web application that interacts with Kafka.
+For simplicity topic in Kafka uses 1 partition.
 
 ## Goal
 
@@ -31,6 +32,10 @@ There is no Web client to test this API.
 You should use some debug tools, e.g. [Yet Another REST Client](https://github.com/paulhitz/yet-another-rest-client) chrome extension.
 
 (Don't forget add header: Content-Type application/json when do post / delete.)
+
+### Logic scheme
+
+![scheme image](https://i.imgur.com/7xcj6HA.png?1)
 
 ## Prerequisites
 
