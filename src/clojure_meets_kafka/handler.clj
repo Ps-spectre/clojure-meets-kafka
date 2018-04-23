@@ -24,12 +24,16 @@
   (let [s (clojure.string/join "\n" (into [] (get @state :filters)))]
     (str "all filters: " s)))
 
+(defn get-messages [r]
+  (str "all message by filter: " 
+       (filters/get-messages (get-in r [:body :id] -1) state)))
+
 (defroutes app-routes
   (GET "/" [] "Web API sample. Get data from Kafka.")
   (GET "/filter" [id] get-filters)
   (DELETE "/filter" [r] delete-filter)
   (POST "/filter" [r] add-filter)
-  (POST "/msg" [r] add-message)
+  (POST "/msg" [r] get-messages)
   (route/not-found "Not Found"))
 
 (def app

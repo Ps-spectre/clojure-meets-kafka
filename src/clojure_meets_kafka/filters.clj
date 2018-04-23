@@ -30,4 +30,12 @@
       (swap! state update-in [ :filters ] dissoc id))
     f))
 
+(defn get-messages [id state]
+  ;; get and filter messages
+  (let [f (get-filter id state)]
+    (when (not (nil? f))
+      (->> (kafka/get-messages (get f :topic) (get f :offset))
+           (filter #(apply clojure.string/includes? [% (get f :q)]))
+           (into [])))))
+
 

@@ -22,8 +22,8 @@ Create and collect messages by filter.
 (add new filter to system)
 * **GET** /filter
 (get all filters)
-* **GET** /filter?id=1 
-(get messages by filter)
+* **POST** /msg {"id": 1} Content-Type application/json
+(get messages by filter) (TODO: improve)
 * **DELETE** /filter {"id": 1} Content-Type	application/json
 (delete filter by id)
 
